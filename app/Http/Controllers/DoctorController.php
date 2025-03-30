@@ -181,7 +181,7 @@ class DoctorController extends Controller
     }
 
 
-    
+    //no estaba funciiando el doctor 
     public function confirmDelete($id){
         $doctor =Doctor::findorFail($id);
         return view('admin.doctores.delete', compact('doctor'));
@@ -195,7 +195,7 @@ class DoctorController extends Controller
     {
         
         $doctor= Doctor::find($id);
-        //eliminar usuario asociado
+        
         $user = $doctor->user;
         $user->delete(); 
         //eliminar a la recepcionista 
