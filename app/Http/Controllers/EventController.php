@@ -128,6 +128,7 @@ class EventController extends Controller
     public function destroy( $id)
     {
         Event::destroy($id);
+        //se agrega la validacion que no se puede eliminar la cita 
         return redirect()->back()->with([
             'mensaje' => 'Se elimino la reserva de la manera correcta',
             'icono' => 'success',

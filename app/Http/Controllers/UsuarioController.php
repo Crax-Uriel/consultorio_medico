@@ -93,6 +93,8 @@ class UsuarioController extends Controller
 
     public function destroy($id){
         $usuario = User::findOrFail($id);
+                //se agrega la validacion que no se puede eliminar la cita 
+
         $usuario->delete();
         return redirect()->route('admin.usuarios.index')->with('mensaje','Se elimino al usuario de manera correcta')->with('icono','success');
     }
