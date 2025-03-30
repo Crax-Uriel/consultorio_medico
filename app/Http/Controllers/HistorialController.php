@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Configuracione;
 use App\Models\Historial;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Proengsoft\JsValidation\Facades\JsValidatorFacade as JsValidator;
+use Barryvdh\DomPDF\Facade\PDF;
+
 class HistorialController extends Controller
 {
     protected $validationRules;
@@ -141,6 +144,29 @@ class HistorialController extends Controller
         $historial = Historial::find($id);
         $historial->delete();
         return redirect()->route('admin.historial.index')->with('mensaje','Se elimino el hsitorial clinico de manera correcta')->with('icono','success');
+    }
+
+    public function pdf($id){
+        
+        $configuracion= Configuracione::latest()->first();
+        $historial = Historial::find($id);
+        $pdf = PDF::loadView('admin.historial.pdf', compact('historial','configuracion'));
+        return $pdf->stream();
+        
+    }
+
+    public function buscar_paciente(Request $request){
+        $curp = $request->curp_paciente;
+        $paciente =Paciente::where('curp_paciente',$curp)->first();
+        return view('admin.historial.buscar_paciente',compact('paciente'));
+    }
+
+    public function imprimir_historial($id){
+        $configuracion= Configuracione::latest()->first();
+        $historiales =Historial::where('paciente_id',$id)->get();
+        $paciente = Paciente::find($id);
+        $pdf = PDF::loadView('admin.historial.imprimir_historial', compact('historiales','configuracion','paciente'));
+        return $pdf->stream();
     }
     
 

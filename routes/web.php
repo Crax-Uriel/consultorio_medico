@@ -6,6 +6,7 @@ use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\HistorialController;
 use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\PacienteController;
+use App\Http\Controllers\PagoController;
 use App\Http\Controllers\SecretariaController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Auth;
@@ -141,7 +142,10 @@ Route::get('/admin/reservas/pdf_fechas', [App\Http\Controllers\EventController::
 Route::controller(HistorialController::class)->middleware('auth')->group(function(){
     Route::get('/admin/historial', 'index')->name('admin.historial.index')->middleware('can:admin.historial.destroy');
     //falta can 
-    Route::get('/admin/historial/reporte', 'reporte')->name('admin.historial.reporte')->middleware('can:admin.historial.reporte');
+    Route::get('/admin/historial/pdf/{id}', 'pdf')->name('admin.historial.pdf')->middleware('can:admin.historial.pdf');
+
+    Route::get('/admin/historial/buscar_paciente', 'buscar_paciente')->name('admin.historial.buscar_paciente')->middleware('can:admin.historial.buscar_paciente');
+    Route::get('/admin/historial/paciente/{id}', 'imprimir_historial')->name('admin.historial.imprimir_historial')->middleware('can:admin.historial.imprimir_historial');
 
     Route::get('/admin/historial/create', 'create')->name('admin.historial.create')->middleware('can:admin.historial.destroy');
     Route::post('/admin/historial/create', 'store')->name('admin.historial.store')->middleware('can:admin.historial.destroy');
@@ -150,6 +154,24 @@ Route::controller(HistorialController::class)->middleware('auth')->group(functio
     Route::put('/admin/historial/{id}', 'update')->name('admin.historial.update')->middleware('can:admin.historial.destroy');
     Route::get('/admin/historial/{id}/confirm-delete',  'confirmDelete')->middleware('can:admin.historial.confirmDelete');
     Route::delete('/admin/historial/{id}', 'destroy')->name('admin.historial.destroy')->middleware('can:admin.historial.destroy');
+
+});
+
+
+
+
+//rutas para pagos   
+Route::controller(PagoController::class)->middleware('auth')->group(function(){
+    Route::get('/admin/pagos', 'index')->name('admin.pagos.index')->middleware('can:admin.pagos.index');
+    //falta can 
+    Route::get('/admin/pagos/pdf/{id}', 'pdf')->name('admin.pagos.pdf')->middleware('can:admin.pagos.pdf');
+    Route::get('/admin/pagos/create', 'create')->name('admin.pagos.create')->middleware('can:admin.pagos.create');
+    Route::post('/admin/pagos/create', 'store')->name('admin.pagos.store')->middleware('can:admin.pagos.store');
+    Route::get('/admin/pagos/{id}', 'show')->name('admin.pagos.show')->middleware('can:admin.pagos.show');
+    Route::get('/admin/pagos/{id}/edit',  'edit')->name('admin.pagos.edit')->middleware('can:admin.pagos.edit');
+    Route::put('/admin/pagos/{id}', 'update')->name('admin.pagos.update')->middleware('can:admin.pagos.destroy');
+    Route::get('/admin/pagos/{id}/confirm-delete',  'confirmDelete')->middleware('can:admin.pagos.confirmDelete');
+    Route::delete('/admin/pagos/{id}', 'destroy')->name('admin.pagos.destroy')->middleware('can:admin.pagos.destroy');
 
 });
 

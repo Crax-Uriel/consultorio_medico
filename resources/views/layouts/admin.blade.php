@@ -40,7 +40,7 @@
         <section id="sidebar">
             <a href="{{url('/admin')}}" class="brand">
                 <img src="{{url('img/logo_consu.png')}}" style="height: 60px; margin-right: 4px; float: left;">
-                SISMEDICAL</a>
+                SISVITALIA</a>
             <ul class="side-menu">
                 {{-- <li><a href="{{url('/admin')}}" class="active"><i class='bx bxs-dashboard icon'></i>Principal</a></li> --}}
                 {{-- <li class="divider" data-text="main">Main</li> --}}
@@ -124,23 +124,27 @@
                 </li>
                 @endcan
 
-                @can('admin.usuarios.index')
+               
+
+
+                @can('admin.historial.index')
                 <li>
-                    <a href="#"><i class='bx bxs-calendar icon' ></i>Reservas<i class='bx bx-chevron-right icon-right' ></i></a>
+                    <a href="#"><i class='bx bxs-user-account icon' ></i>Historiales Clinicos<i class='bx bx-chevron-right icon-right' ></i></a>
                     <ul class="side-dropdown">
-                        <li><a href="{{url('admin/reservas/reportes')}}">Reportes</a></li>
+                        <li><a href="{{url('admin/historial')}}">Listado de Historiales</a></li>
+                        <li><a href="{{url('admin/historial/create')}}">Registrar hsitorial</a></li> 
+                        <li><a href="{{url('admin/historial/buscar_paciente')}}">Buscar paciente</a></li> 
                         
                     </ul>
                 </li>
                 @endcan
 
-
-                @can('admin.historial.index')
+                @can('admin.pagos.index')
                 <li>
-                    <a href="#"><i class='bx bxs-user-account icon' ></i>Historial Clinico<i class='bx bx-chevron-right icon-right' ></i></a>
+                    <a href="#"><i class='bx  bx-money icon' ></i>Pagos<i class='bx bx-chevron-right icon-right' ></i></a>
                     <ul class="side-dropdown">
-                        <li><a href="{{url('admin/historial')}}">Listado de Historiales</a></li>
-                        <li><a href="{{url('admin/historial/create')}}">Registrar hsitorial</a></li> 
+                        <li><a href="{{url('admin/pagos')}}">Listado de pagos</a></li>
+                        <li><a href="{{url('admin/pagos/create')}}">Registrar pago</a></li> 
                         
                     </ul>
                 </li>

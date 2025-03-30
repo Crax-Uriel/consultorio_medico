@@ -94,19 +94,19 @@
         <table class="table-content" border="0" cellpadding="6">
             <tr class="row-hover">
                 <td >Paciente: </td>
-                <td> {{$historial->paciente->apellido_paterno_paciente." ".$historial->paciente->apellido_materno_paciente." ".$historial->paciente->nombre_paciente}} </td>
+                <td> {{$paciente->apellido_paterno_paciente." ".$paciente->apellido_materno_paciente." ".$paciente->nombre_paciente}} </td>
             </tr>
             <tr class="row-hover">
                 <td><b>CURP: </b></td>
-                <td>{{$historial->paciente->curp_paciente}}</td>
+                <td>{{$paciente->curp_paciente}}</td>
             </tr>
             <tr class="row-hover">
                 <td><b>Numero de seguro social: </b></td>
-                <td>{{$historial->paciente->nss}}</td>
+                <td>{{$paciente->nss}}</td>
             </tr>
             <tr class="row-hover">
                 <td><b>Fecha de nacimiento: </b></td>
-                <td>{{$historial->paciente->fecha_nacimiento_paciente}}</td>
+                <td>{{$paciente->fecha_nacimiento_paciente}}</td>
             </tr>
     
             <tr class="row-hover">
@@ -119,34 +119,16 @@
     <br><br>
 
 
-    <div style="border: 1px solid #000000;">
-        <h3 class="titulo_info">Informacion del Doctor</h3>
-        <table class="table-content" border="0" cellpadding="6">
-            <tr class="row-hover">
-                <td>Doctor: </td>
-                <td> {{$historial->doctor->apellido_paterno_doctor." ".$historial->doctor->apellido_materno_doctor." ".$historial->doctor->nombre_doctor}} </td>
-            </tr>
-            <tr class="row-hover">
-                <td><b>Licencia medica: </b></td>
-                <td>{{$historial->doctor->licencia_medica}}</td>
-            </tr>
-            <tr class="row-hover">
-                <td><b>Especialidad: </b></td>
-                <td>{{$historial->doctor->especialidad}}</td>
-            </tr>
-            <tr class="row-hover">
-                <td><b></b></td>
-            </tr>
-        </table>
-    </div>
     
 
 
-    
     <hr>
-    <h3>Diagnostico realizado</h3>
-    <p>Fecha: {{ $historial ->fecha_visita}}</p>
-    <p>Detalle de la cita: {!! $historial->detalle!!}</p>
+    <h3>Diagnosticos realizados</h3>
+    @foreach ($historiales as $historiale)
+    <p>Fecha: {{ $historiale ->fecha_visita}}</p>
+    <p>Detalle de la cita: {!! $historiale->detalle!!}</p>
+    @endforeach
+    
 
     <div class="footer">
         Impreso por: {{ Auth::user()->name }} <br>

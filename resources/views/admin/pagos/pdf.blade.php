@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Reporte - Listado del Personal Médico</title>
+    <title>Comprobante de pago</title>
     <style>
         .content-body {
             font-family: Arial, sans-serif;
@@ -22,7 +22,7 @@
             border-collapse: collapse;
             margin-top: 20px;
             font-size: 12px;
-            text-align: center;
+            text-align: left;
         }
 
         th.table-header, td.table-data {
@@ -64,6 +64,14 @@
             text-align: center;
         }
 
+
+        .firma {
+        display: inline-block;
+        width: 200px; /* Ajusta el ancho de la línea */
+        border-top: 2px solid black; /* Línea superior */
+        text-align: center;
+        padding-top: 5px; /* Espacio entre la línea y el texto */
+    }
     </style>
 
 </head>
@@ -83,70 +91,104 @@
         </tr>
     </table>
 
-    <h2 class="title"><b><u>Historial Medico</u></b></h2>
-    <br>
+    <h2 class="title"><b><u>Comprobante de pago - Original</u></b></h2>
+    <div style="text-align: center" >
+        <img  src="data:image/png;base64,{{$qrCodeBase64}}" alt="Codigoqr" width="80px">
+    </div>
     <p id="fecha-hora"> 
         Generado el {{ date('d-m-Y') }} a las {{ date('H:i') }}
     </p>
 
     <div style="border: 1px solid #000000;">
-        <h3 class="titulo_info">Informacion del paciente</h3>
         <table class="table-content" border="0" cellpadding="6">
             <tr class="row-hover">
-                <td >Paciente: </td>
-                <td> {{$historial->paciente->apellido_paterno_paciente." ".$historial->paciente->apellido_materno_paciente." ".$historial->paciente->nombre_paciente}} </td>
+                <td >Sr (): </td>
+                <td>{{$pago->paciente->apellido_paterno_paciente." ".$pago->paciente->apellido_materno_paciente." ".$pago->paciente->nombre_paciente}}</td>
+                <td >Fecha: </td>
+                <td>{{$pago->fecha_pago}}</td>
+
+                
             </tr>
+        
             <tr class="row-hover">
-                <td><b>CURP: </b></td>
-                <td>{{$historial->paciente->curp_paciente}}</td>
+                <td >Monto: </td>
+                <td>{{$pago->monto}}</td>
             </tr>
+
             <tr class="row-hover">
-                <td><b>Numero de seguro social: </b></td>
-                <td>{{$historial->paciente->nss}}</td>
+                <td >Consultorio de especialidad: </td>
+                <td>{{$pago->doctor->especialidad}}</td>
             </tr>
-            <tr class="row-hover">
-                <td><b>Fecha de nacimiento: </b></td>
-                <td>{{$historial->paciente->fecha_nacimiento_paciente}}</td>
-            </tr>
+           
     
             <tr class="row-hover">
                 <td><b></b></td>
             </tr>
         </table>
-
     </div>
-    <hr>
-    <br><br>
+    <hr><br><br><br>
+    <table class="table-content" border="0" cellpadding="6">
+        <tr style="text-align: center">
+            <td><span class="firma">Secretaria <br> Miche Plata</span></td>
+            <td><span class="firma">Recibí: <br> {{$pago->paciente->apellido_paterno_paciente." ".$pago->paciente->apellido_materno_paciente." ".$pago->paciente->nombre_paciente}}</span></td>
+        </tr>
 
+    </table>
+    <br>
+   
+    <p style="text-align: center">--------------------------------------------------------------------------------------------------------------------------</p>
+
+
+    <h2 class="title"><b><u>Comprobante de pago - Copia</u></b></h2>
+    <div style="text-align: center" >
+        <img src="data:image/png;base64,{{$qrCodeBase64}}" alt="Codigoqr" width="80px">
+    </div>
+    <p id="fecha-hora"> 
+        Generado el {{ date('d-m-Y') }} a las {{ date('H:i') }}
+    </p>
 
     <div style="border: 1px solid #000000;">
-        <h3 class="titulo_info">Informacion del Doctor</h3>
         <table class="table-content" border="0" cellpadding="6">
             <tr class="row-hover">
-                <td>Doctor: </td>
-                <td> {{$historial->doctor->apellido_paterno_doctor." ".$historial->doctor->apellido_materno_doctor." ".$historial->doctor->nombre_doctor}} </td>
+                <td >Sr (): </td>
+                <td>{{$pago->paciente->apellido_paterno_paciente." ".$pago->paciente->apellido_materno_paciente." ".$pago->paciente->nombre_paciente}}</td>
+                <td >Fecha: </td>
+                <td>{{$pago->fecha_pago}}</td>
+
+                
             </tr>
+        
             <tr class="row-hover">
-                <td><b>Licencia medica: </b></td>
-                <td>{{$historial->doctor->licencia_medica}}</td>
+                <td >Monto: </td>
+                <td>{{$pago->monto}}</td>
+                
             </tr>
+
             <tr class="row-hover">
-                <td><b>Especialidad: </b></td>
-                <td>{{$historial->doctor->especialidad}}</td>
+                <td >Consultorio de especialidad: </td>
+                <td>{{$pago->doctor->especialidad}}</td>
             </tr>
+           
+    
             <tr class="row-hover">
                 <td><b></b></td>
             </tr>
         </table>
     </div>
+    <hr><br><br><br>
+    <table class="table-content" border="0" cellpadding="6">
+        <tr style="text-align: center">
+            <td><span class="firma">Secretaria <br> Miche Plata</span></td>
+            <td><span class="firma">Recibí: <br> {{$pago->paciente->apellido_paterno_paciente." ".$pago->paciente->apellido_materno_paciente." ".$pago->paciente->nombre_paciente}}</span></td>
+        </tr>
+
+    </table>
+    <br>
+    
+
     
 
 
-    
-    <hr>
-    <h3>Diagnostico realizado</h3>
-    <p>Fecha: {{ $historial ->fecha_visita}}</p>
-    <p>Detalle de la cita: {!! $historial->detalle!!}</p>
 
     <div class="footer">
         Impreso por: {{ Auth::user()->name }} <br>

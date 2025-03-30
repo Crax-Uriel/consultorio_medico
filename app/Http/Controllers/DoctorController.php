@@ -180,6 +180,14 @@ class DoctorController extends Controller
 
     }
 
+
+    
+    public function confirmDelete($id){
+        $doctor =Doctor::findorFail($id);
+        return view('admin.doctores.delete', compact('doctor'));
+    } 
+
+
     /**
      * Remove the specified resource from storage.
      */

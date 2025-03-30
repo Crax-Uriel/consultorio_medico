@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Consultorio;
+use App\Models\Doctor;
 use App\Models\Event;
 use App\Models\Horario;
+use App\Models\Paciente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -13,8 +15,11 @@ class WebController extends Controller
 {
     public function index(){
         //echo $id;
+        $total_pacientes = Paciente::count();
         $consultorios = Consultorio::all();
-        return view('index',compact('consultorios'));
+        $total_consultorios = Consultorio::count();
+        $total_doctores = Doctor::count();
+        return view('index',compact('consultorios','total_pacientes','total_consultorios','total_doctores'));
     }
 
     public function cargar_datos_consultorios($id){

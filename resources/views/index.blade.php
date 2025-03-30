@@ -30,13 +30,8 @@
     <!-- jQuery -->
     <script src="{{url('plugins/jquery/jquery.min.js')}}"></script>
 
-    <!-- =======================================================
-    * Template Name: Medilab
-    * Template URL: https://bootstrapmade.com/medilab-free-medical-bootstrap-theme/
-    * Updated: Aug 07 2024 with Bootstrap v5.3.3
-    * Author: BootstrapMade.com
-    * License: https://bootstrapmade.com/license/
-    ======================================================== -->
+   <!-- Theme style -->
+   <link rel="stylesheet" href="{{url('dist/css/adminlte.min.css')}}">
 </head>
     <body class="index-page">
 
@@ -45,7 +40,7 @@
         <div class="topbar d-flex align-items-center">
         <div class="container d-flex justify-content-center justify-content-md-between">
             <div class="contact-info d-flex align-items-center">
-            <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">contact@example.com</a></i>
+            <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">contacto@gmail.com</a></i>
             <i class="bi bi-phone d-flex align-items-center ms-4"><span>+52 729 308 0344</span></i>
             </div>
             <div class="social-links d-none d-md-flex align-items-center">
@@ -122,9 +117,7 @@
                 <h3>¿Por qué elegir Vitalia?</h3>
                 <p>En Vitalia nos comprometemos a ofrecer un servicio excepcional y personalizado para cada uno de nuestros pacientes. Aquí te damos algunas razones por las que somos la mejor opción para tu salud:</p>
 
-                <div class="text-center">
-                    <a href="#about" class="more-btn"><span>Saber mas</span> <i class="bi bi-chevron-right"></i></a>
-                </div>
+                
                 </div>
             </div><!-- End Why Box -->
 
@@ -225,7 +218,7 @@
             <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
                 <i class="fa-solid fa-user-doctor"></i>
                 <div class="stats-item">
-                <span data-purecounter-start="0" data-purecounter-end="85" data-purecounter-duration="1" class="purecounter"></span>
+                <span data-purecounter-start="0" data-purecounter-end="{{$total_doctores}}" data-purecounter-duration="1" class="purecounter"></span>
                 <p>Doctores</p>
                 </div>
             </div><!-- End Stats Item -->
@@ -233,7 +226,7 @@
             <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
                 <i class="fa-regular fa-hospital"></i>
                 <div class="stats-item">
-                <span data-purecounter-start="0" data-purecounter-end="18" data-purecounter-duration="1" class="purecounter"></span>
+                <span data-purecounter-start="0" data-purecounter-end="{{$total_consultorios}}" data-purecounter-duration="1" class="purecounter"></span>
                 <p>Departamentos</p>
                 </div>
             </div><!-- End Stats Item -->
@@ -241,7 +234,7 @@
             <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
                 <i class="fas fa-flask"></i>
                 <div class="stats-item">
-                <span data-purecounter-start="0" data-purecounter-end="12" data-purecounter-duration="1" class="purecounter"></span>
+                <span data-purecounter-start="0" data-purecounter-end="6" data-purecounter-duration="1" class="purecounter"></span>
                 <p>Servicios</p>
                 </div>
             </div><!-- End Stats Item -->
@@ -249,7 +242,7 @@
             <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
                 <i class="fas fa-award"></i>
                 <div class="stats-item">
-                <span data-purecounter-start="0" data-purecounter-end="150" data-purecounter-duration="1" class="purecounter"></span>
+                <span data-purecounter-start="0" data-purecounter-end=" {{$total_pacientes}} " data-purecounter-duration="1" class="purecounter"></span>
                 <p>Pacientes</p>
                 </div>
             </div><!-- End Stats Item -->
@@ -374,6 +367,30 @@
 
         </section><!-- /Services Section -->
 
+
+
+         <!-- Appointment Section -->
+         <section id="appointment" class="appointment section">
+            <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
+            <h2>Concurridos de personas</h2>
+        <div class="card card-info">
+            <div class="card-header">
+                <h3 class="card-title">Días más concurridos</h3>
+            </div>
+            <div class="card-body">
+                <canvas id="chartDias"></canvas>
+            </div>
+                <!-- /.card-body -->
+        </div>
+
+    </div><!-- End Section Title -->
+
+        
+
+    </section><!-- /Appointment Section -->
+
+
         <!-- Appointment Section -->
         <section id="appointment" class="appointment section">
 
@@ -381,11 +398,14 @@
         <div class="container section-title" data-aos="fade-up">
             <h2>Calendario de atencion de doctores</h2>
 
-            <div class="col-12">
+            <div class="col-md-12">
                 <div class="card card-outline card-primary">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h3 class="card-title">Horarios de Médicos</h3>
-                        <div class="form group ms-0">
+                    <div class="card-header ">
+                        <div class="col-md-12" style="text-align: center">
+                            <h3 class="card-title">Horarios de atencion</h3>
+                        </div>
+                        
+                        <div class="form-group">
                             <label><b>Consultorios:</b></label>
                             <select name="consultorio_id" id="consultorio_select" class="form-control">
                                 <option value="" disabled selected>Seleccione un consultorio..</option>
@@ -718,151 +738,7 @@
 
         </section><!-- /Faq Section -->
 
-        <!-- Testimonials Section -->
-        <section id="testimonials" class="testimonials section">
-
-        <div class="container">
-
-            <div class="row align-items-center">
-
-            <div class="col-lg-5 info" data-aos="fade-up" data-aos-delay="100">
-                <h3>Testimonios</h3>
-                <p>
-                testimonios :
-                </p>
-            </div>
-
-            {{-- <div class="col-lg-7" data-aos="fade-up" data-aos-delay="200">
-
-                <div class="swiper init-swiper">
-                <script type="application/json" class="swiper-config">
-                    {
-                    "loop": true,
-                    "speed": 600,
-                    "autoplay": {
-                        "delay": 5000
-                    },
-                    "slidesPerView": "auto",
-                    "pagination": {
-                        "el": ".swiper-pagination",
-                        "type": "bullets",
-                        "clickable": true
-                    }
-                    }
-                </script>
-                <div class="swiper-wrapper">
-
-                    <div class="swiper-slide">
-                    <div class="testimonial-item">
-                        <div class="d-flex">
-                        <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img flex-shrink-0" alt="">
-                        <div>
-                            <h3>Saul Goodman</h3>
-                            <h4>Ceo &amp; Founder</h4>
-                            <div class="stars">
-                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                            </div>
-                        </div>
-                        </div>
-                        <p>
-                        <i class="bi bi-quote quote-icon-left"></i>
-                        <span>Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.</span>
-                        <i class="bi bi-quote quote-icon-right"></i>
-                        </p>
-                    </div>
-                    </div><!-- End testimonial item -->
-
-                    <div class="swiper-slide">
-                    <div class="testimonial-item">
-                        <div class="d-flex">
-                        <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img flex-shrink-0" alt="">
-                        <div>
-                            <h3>Sara Wilsson</h3>
-                            <h4>Designer</h4>
-                            <div class="stars">
-                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                            </div>
-                        </div>
-                        </div>
-                        <p>
-                        <i class="bi bi-quote quote-icon-left"></i>
-                        <span>Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.</span>
-                        <i class="bi bi-quote quote-icon-right"></i>
-                        </p>
-                    </div>
-                    </div><!-- End testimonial item -->
-
-                    <div class="swiper-slide">
-                    <div class="testimonial-item">
-                        <div class="d-flex">
-                        <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img flex-shrink-0" alt="">
-                        <div>
-                            <h3>Jena Karlis</h3>
-                            <h4>Store Owner</h4>
-                            <div class="stars">
-                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                            </div>
-                        </div>
-                        </div>
-                        <p>
-                        <i class="bi bi-quote quote-icon-left"></i>
-                        <span>Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.</span>
-                        <i class="bi bi-quote quote-icon-right"></i>
-                        </p>
-                    </div>
-                    </div><!-- End testimonial item -->
-
-                    <div class="swiper-slide">
-                    <div class="testimonial-item">
-                        <div class="d-flex">
-                        <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img flex-shrink-0" alt="">
-                        <div>
-                            <h3>Matt Brandon</h3>
-                            <h4>Freelancer</h4>
-                            <div class="stars">
-                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                            </div>
-                        </div>
-                        </div>
-                        <p>
-                        <i class="bi bi-quote quote-icon-left"></i>
-                        <span>Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.</span>
-                        <i class="bi bi-quote quote-icon-right"></i>
-                        </p>
-                    </div>
-                    </div><!-- End testimonial item -->
-
-                    <div class="swiper-slide">
-                    <div class="testimonial-item">
-                        <div class="d-flex">
-                        <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img flex-shrink-0" alt="">
-                        <div>
-                            <h3>John Larson</h3>
-                            <h4>Entrepreneur</h4>
-                            <div class="stars">
-                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                            </div>
-                        </div>
-                        </div>
-                        <p>
-                        <i class="bi bi-quote quote-icon-left"></i>
-                        <span>Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.</span>
-                        <i class="bi bi-quote quote-icon-right"></i>
-                        </p>
-                    </div>
-                    </div><!-- End testimonial item -->
-
-                </div>
-                <div class="swiper-pagination"></div>
-                </div>
-
-            </div> --}}
-
-            </div>
-
-        </div>
-
-        </section><!-- /Testimonials Section -->
+       
 
         <!-- Gallery Section -->
         <section id="gallery" class="gallery section">
@@ -1131,6 +1007,70 @@
 
     <!-- Main JS File -->
     <script src="assets/js/main.js"></script>
+    <!-- AdminLTE App -->
+    <script src="{{url('dist/js/adminlte.min.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="{{asset('js/script.js')}} "></script>
+
+    <script src="{{url('plugins/jszip/jszip.min.js')}}"></script>
+    <script src="{{url('plugins/pdfmake/pdfmake.min.js')}}"></script>
+    <script src="{{url('plugins/pdfmake/vfs_fonts.js')}}"></script>
+    <script src="{{url('plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
+    <script src="{{url('plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
+    <script src="{{url('plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Datos de concurrencia simulados (reemplázalos con datos reales)
+                let dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
+                let concurrenciaDias = [0, 0, 0, 0, 0, 0, 0]; // Número de personas por día
+            
+                // Gráfico de concurrencia por días
+                var ctxDias = document.getElementById("chartDias").getContext("2d");
+                new Chart(ctxDias, {
+                    type: "bar",
+                    data: {
+                        labels: dias,
+                        datasets: [{
+                            label: "Personas",
+                            data: concurrenciaDias,
+                            backgroundColor: "rgba(60,141,188,0.7)",
+                            borderColor: "rgba(60,141,188,1)",
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            });
+            </script>
+
+
+    <script>
+        window.addEventListener('mouseover', initLandbot, { once: true });
+        window.addEventListener('touchstart', initLandbot, { once: true });
+        var myLandbot;
+        function initLandbot() {
+        if (!myLandbot) {
+            var s = document.createElement('script');
+            s.type = "module"
+            s.async = true;
+            s.addEventListener('load', function() {
+            var myLandbot = new Landbot.Livechat({
+                configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-2845549-KJOEGQJLIBJDDXTA/index.json',
+            });
+            });
+            s.src = 'https://cdn.landbot.io/landbot-3/landbot-3.0.0.mjs';
+            var x = document.getElementsByTagName('script')[0];
+            x.parentNode.insertBefore(s, x);
+        }
+        }
+    </script>
 
     </body>
 

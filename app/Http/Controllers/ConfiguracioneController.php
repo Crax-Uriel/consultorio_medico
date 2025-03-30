@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Storage;
 
 class ConfiguracioneController extends Controller
 {
-    /**
-     * Display a listing of the resource.
+    /*
+    Vista del index 
      */
     public function index()
     {
@@ -18,8 +18,8 @@ class ConfiguracioneController extends Controller
         return view('admin.configuraciones.index', compact('configuraciones'));
     }
 
-    /**
-     * Show the form for creating a new resource.
+    /*
+    Vista que retorna las configutaciones del sistema 
      */
     public function create()
     {
@@ -27,12 +27,12 @@ class ConfiguracioneController extends Controller
         return view('admin.configuraciones.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
+    /*
+    Metodo que crea el regsitro y lo alamcena en la abse de datos 
      */
     public function store(Request $request)
     {
-        //
+        //Validaciona antes de crear 
         $request->validate([
             'nombre' =>'required|regex:/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/|max:80',
             'direccion' =>'required|max:200',
@@ -40,21 +40,21 @@ class ConfiguracioneController extends Controller
             'correo' =>'required|max:250|unique:configuraciones,correo,',
             'logo' =>'required',
         ]);
-
+        //Creamos una nueva instancia y traemos lo que hay del request 
         $configuracion = new Configuracione();
         $configuracion->nombre = $request->nombre;
         $configuracion->direccion = $request->direccion;
         $configuracion->telefono = $request->telefono;
         $configuracion->correo = $request->correo;
         $configuracion->logo = $request->file('logo')->store('logos','public');
-        
+        //Guardamos en la bsa de datos 
         $configuracion->save(); 
-
+        //Retornamos al listado con un mensaje de exito 
         return redirect()->route('admin.configuraciones.index')->with('mensaje','Se registro la configuracion de manera correcta')->with('icono','success');
     }
 
-    /**
-     * Display the specified resource.
+    /*
+        Metodo show para ver los datos 
      */
     public function show( $id)
     {
@@ -63,8 +63,8 @@ class ConfiguracioneController extends Controller
         return view('admin.configuraciones.show', compact('configuracion'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
+    /*
+        metodo que retorna la vista edit 
      */
     public function edit( $id)
     {
@@ -73,15 +73,16 @@ class ConfiguracioneController extends Controller
         return view('admin.configuraciones.edit', compact('configuracion'));
     }
 
-    /**
-     * Update the specified resource in storage.
+    /*
+    Metodo que actuliza los datos 
      */
     public function update(Request $request, $id)
     {
         //$datos = request()->all();
         //return response()->json($datos);
+        //Buscamos el id correpsondoiente 
         $configuracion = Configuracione::find($id);
-        
+        //validamos los datos anstes de enviarlos 
         $request->validate([
             'nombre' =>'required|regex:/^[A-Za-z\s]+$/|max:100',
             'direccion' =>'required|max:100',
@@ -90,6 +91,7 @@ class ConfiguracioneController extends Controller
             
         ]);
         
+        //traemos que hay en el re quest y lo gurdamos 
         $configuracion->nombre = $request->nombre;
         $configuracion->direccion = $request->direccion;
         $configuracion->telefono = $request->telefono;
@@ -110,11 +112,11 @@ class ConfiguracioneController extends Controller
         }
         
         
-
+        //gurdamos la actualizacin 
         $configuracion->save();
         return redirect()->route('admin.configuraciones.index')->with('mensaje','Se actualizo la configuracion de manera correcta')->with('icono','success');
     }
-
+    //nos mostrara la confoirmacion antes de eliminar 
     public function confirmDelete($id){
         $configuracion =Configuracione::findorFail($id);
         return view('admin.configuraciones.delete', compact('configuracion'));

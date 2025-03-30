@@ -6,7 +6,7 @@ Iniciar sesion
 <div class="container-form register">
     <div class="information">
         <div class="info-childs">
-            <h2>Bienvenido</h2>
+            <a href=" {{url('/')}} " style="color: beige; "> <- </a><h2>Bienvenido</h2>
             <p>Para acceder a nuestro sistema, por favor inicia sesión con tus datos o regístrate.
             </p>
             <img src="{{url('img/logo_consu.png')}}">
