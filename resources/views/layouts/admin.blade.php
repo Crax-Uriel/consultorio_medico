@@ -53,6 +53,8 @@
                         
                     </ul>
                 </li> --}}
+                <li><a href="{{url('admin/perfil')}}"><i class='bx bx-cog icon' ></i>Perfil</a></li>
+
                 @can('admin.configuraciones.index')
                 <li><a href="{{url('admin/configuraciones')}}"><i class='bx bx-cog icon' ></i>Configuraciones</a></li>
                 @endcan
@@ -257,7 +259,10 @@
                 <div class="profile">
                     {{ Auth::user()->name }} 
                     <img src="https://th.bing.com/th/id/OIP.f4wLVIL_SURqRFpL7fdr2QHaHa?rs=1&pid=ImgDetMain" alt="Perfil"> 
+                
                     <ul class="profile-link">
+                        <li ><a  href="{{ url('admin/perfil')}}" style="color: black"><i class='bx bxs-user' ></i> Perfil</a></li>
+
                         <li ><a  href="{{ route('logout') }}" onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();" ><i class='bx bxs-arrow-from-right' ></i> Salir</a></li>
                         

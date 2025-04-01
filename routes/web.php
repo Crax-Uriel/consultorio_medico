@@ -7,6 +7,7 @@ use App\Http\Controllers\HistorialController;
 use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\PagoController;
+use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\SecretariaController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Auth;
@@ -160,6 +161,13 @@ Route::controller(PagoController::class)->middleware('auth')->group(function(){
     Route::delete('/admin/pagos/{id}', 'destroy')->name('admin.pagos.destroy')->middleware('can:admin.pagos.destroy');
 });
 
+
+//rutas para perfil   
+Route::controller(PerfilController::class)->middleware('auth')->group(function(){
+    Route::get('/admin/perfil', 'index')->name('admin.perfil.index');
+    Route::get('/admin/perfil/{id}/edit',  'edit')->name('admin.perfil.edit');
+    Route::put('/admin/perfil/{id}', 'update')->name('admin.perfil.update');
+});
 
 
 
