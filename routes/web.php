@@ -18,13 +18,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [App\Http\Controllers\WebController::class, 'index'])->name('index');
-
 Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index')->middleware('auth');
-
 
 // rutas para el admnin-usuarios 
 Route::controller(UsuarioController::class)->middleware('auth')->group(function(){
@@ -37,7 +33,6 @@ Route::controller(UsuarioController::class)->middleware('auth')->group(function(
     Route::get('/admin/usuarios/{id}/confirm-delete',  'confirmDelete')->name('admin.usuarios.confirmDelete')->middleware('can:admin.usuarios.confirmDelete');
     Route::delete('/admin/usuarios/{id}',  'destroy')->name('admin.usuarios.destroy')->middleware('can:admin.usuarios.destroy');
 });
-
 //rutas para secretarias 
 Route::controller(SecretariaController::class)->middleware('auth')->group(function(){
     Route::get('/admin/secretarias', 'index')->name('admin.secretarias.index')->middleware('can:admin.secretarias.index');
@@ -90,7 +85,6 @@ Route::controller(DoctorController::class)->middleware('auth')->group(function()
 
 });
 
-
 //rutas para horarios  
 Route::controller(HorarioController::class)->middleware('auth')->group(function(){
     Route::get('/admin/horarios', 'index')->name('admin.horarios.index')->middleware('can:admin.horarios.index');
@@ -105,7 +99,6 @@ Route::controller(HorarioController::class)->middleware('auth')->group(function(
 
 //AJAX
 Route::get('/admin/horarios/consultorios/{id}', [App\Http\Controllers\HorarioController::class, 'cargar_datos_consultorios'])->name('admin.horarios.cargar_datos_consultorios')->middleware('can:admin.horarios.cargar_datos_consultorios');
-
 
 //rutas para el suuario
 Route::get('/consultorios/{id}', [App\Http\Controllers\WebController::class, 'cargar_datos_consultorios'])->name('cargar_datos_consultorios');
@@ -132,9 +125,7 @@ Route::controller(ConfiguracioneController::class)->middleware('auth')->group(fu
 
 //rutas para reservas
 Route::get('/admin/reservas/reportes', [App\Http\Controllers\EventController::class, 'reportes'])->name('admin.reservas.reportes');
-
 Route::get('/admin/reservas/pdf', [App\Http\Controllers\EventController::class, 'pdf'])->name('admin.reservas.pdf');
-
 Route::get('/admin/reservas/pdf_fechas', [App\Http\Controllers\EventController::class, 'pdf_fechas'])->name('admin.reservas.pdf_fechas');
 
 
@@ -143,10 +134,8 @@ Route::controller(HistorialController::class)->middleware('auth')->group(functio
     Route::get('/admin/historial', 'index')->name('admin.historial.index')->middleware('can:admin.historial.destroy');
     //falta can 
     Route::get('/admin/historial/pdf/{id}', 'pdf')->name('admin.historial.pdf')->middleware('can:admin.historial.pdf');
-
     Route::get('/admin/historial/buscar_paciente', 'buscar_paciente')->name('admin.historial.buscar_paciente')->middleware('can:admin.historial.buscar_paciente');
     Route::get('/admin/historial/paciente/{id}', 'imprimir_historial')->name('admin.historial.imprimir_historial')->middleware('can:admin.historial.imprimir_historial');
-
     Route::get('/admin/historial/create', 'create')->name('admin.historial.create')->middleware('can:admin.historial.destroy');
     Route::post('/admin/historial/create', 'store')->name('admin.historial.store')->middleware('can:admin.historial.destroy');
     Route::get('/admin/historial/{id}', 'show')->name('admin.historial.show')->middleware('can:admin.historial.destroy');
@@ -156,9 +145,6 @@ Route::controller(HistorialController::class)->middleware('auth')->group(functio
     Route::delete('/admin/historial/{id}', 'destroy')->name('admin.historial.destroy')->middleware('can:admin.historial.destroy');
 
 });
-
-
-
 
 //rutas para pagos   
 Route::controller(PagoController::class)->middleware('auth')->group(function(){
@@ -172,7 +158,6 @@ Route::controller(PagoController::class)->middleware('auth')->group(function(){
     Route::put('/admin/pagos/{id}', 'update')->name('admin.pagos.update')->middleware('can:admin.pagos.destroy');
     Route::get('/admin/pagos/{id}/confirm-delete',  'confirmDelete')->middleware('can:admin.pagos.confirmDelete');
     Route::delete('/admin/pagos/{id}', 'destroy')->name('admin.pagos.destroy')->middleware('can:admin.pagos.destroy');
-
 });
 
 

@@ -93,7 +93,20 @@ class UsuarioController extends Controller
 
     public function destroy($id){
         $usuario = User::findOrFail($id);
-                //se agrega la validacion que no se puede eliminar la cita 
+        if ($usuario->events()->count() > 0) { 
+            return redirect()->route('admin.usuarios.index')
+            ->with('mensaje', 'No se puede eliminar al usuarios porque tiene reservas asociadas')
+            ->with('icono', 'error');
+        }elseif ($usuario->doctor()->count() > 0) { 
+            return redirect()->route('admin.usuarios.index')
+                ->with('mensaje', 'No se puede eliminar al usuario porque tiene un doctor asociado')
+                ->with('icono', 'error');
+        }elseif ($usuario->secretarias()->count() > 0) { 
+            return redirect()->route('admin.usuarios.index')
+                ->with('mensaje', 'No se puede eliminar al usuario porque tiene una secretaria asociada')
+                ->with('icono', 'error');
+        }
+        
 
         $usuario->delete();
         return redirect()->route('admin.usuarios.index')->with('mensaje','Se elimino al usuario de manera correcta')->with('icono','success');

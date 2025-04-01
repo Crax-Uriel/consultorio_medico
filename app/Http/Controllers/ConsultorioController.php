@@ -118,6 +118,18 @@ class ConsultorioController extends Controller
     public function destroy($id)
     {
         $consultorio =Consultorio::findorFail($id);
+
+        if ($consultorio->horarios()->count() > 0) { 
+            return redirect()->route('admin.consultorios.index')
+            ->with('mensaje', 'No se puede eliminar al consultorio porque tiene un horario activo')
+            ->with('icono', 'error');
+        }elseif ($consultorio->events()->count() > 0) { 
+            return redirect()->route('admin.consultorios.index')
+                ->with('mensaje', 'No se puede eliminar al consultorio porque tiene una reservas asociadas')
+                ->with('icono', 'error');
+        }
+
+
         $consultorio->delete();
         return redirect()->route('admin.consultorios.index')->with('mensaje','Se elimino el consultorio de manera correcta')->with('icono','success');
     }

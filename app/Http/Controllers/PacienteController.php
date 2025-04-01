@@ -152,6 +152,16 @@ class PacienteController extends Controller
     public function destroy( $id)
     {
         $paciente =Paciente::findorFail($id);
+        if ($paciente->historial()->count() > 0) { 
+            return redirect()->route('admin.pacientes.index')
+            ->with('mensaje', 'No se puede eliminar al paciente porque tiene un histotrial activo')
+            ->with('icono', 'error');
+        }elseif ($paciente->pagos()->count() > 0) { 
+            return redirect()->route('admin.pacientes.index')
+                ->with('mensaje', 'No se puede eliminar al paciente porque tiene un pago asociado')
+                ->with('icono', 'error');
+        }
+
         $paciente->delete();
         return redirect()->route('admin.pacientes.index')->with('mensaje','Se elimino al paciente de manera correcta')->with('icono','success');
     }

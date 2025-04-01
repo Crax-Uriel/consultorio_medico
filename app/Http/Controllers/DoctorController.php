@@ -195,6 +195,25 @@ class DoctorController extends Controller
     {
         
         $doctor= Doctor::find($id);
+
+        if ($doctor->horarios()->count() > 0) { 
+            return redirect()->route('admin.doctores.index')
+            ->with('mensaje', 'No se puede eliminar al doctor porque tiene un horario activo')
+            ->with('icono', 'error');
+        }elseif ($doctor->events()->count() > 0) { 
+            return redirect()->route('admin.doctores.index')
+                ->with('mensaje', 'No se puede eliminar al doctor porque tiene una reservas asociadas')
+                ->with('icono', 'error');
+        }elseif ($doctor->historial()->count() > 0) { 
+            return redirect()->route('admin.doctores.index')
+                ->with('mensaje', 'No se puede eliminar al doctor porque tiene un historiales asociados')
+                ->with('icono', 'error');
+        }elseif ($doctor->pagos()->count() > 0) { 
+            return redirect()->route('admin.doctores.index')
+                ->with('mensaje', 'No se puede eliminar al doctor porque tiene pagos asociados')
+                ->with('icono', 'error');
+        }
+
         
         $user = $doctor->user;
         $user->delete(); 
