@@ -78,6 +78,36 @@ Registrarse
                         
                         <br>
                     </div>
+
+
+                    <div id="privacy-modal" class="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5);">
+                        <div class="modal-content" style="background:#fff; padding:20px; width:50%; margin:10% auto; position:relative;">
+                            <span id="close-modal" style="position:absolute; top:10px; right:20px; cursor:pointer;">&times;</span>
+                            <h2>Acuerdos de Privacidad</h2>
+                            <br>
+                            <hr>
+                            <br>
+                            <p>1. Recopilación de Información
+                                El consultorio recopila información personal proporcionada por los pacientes, incluyendo pero no limitado a:
+                                <ul>
+                                    <li> Nombre completo</li>
+                                    <li> Número de teléfono</li>
+                                    <li> Correo electrónico</li>
+                                    <li> Historial médico y antecedentes clínicos</li>
+                                </ul>
+                            
+                                </p>
+                        </div>
+                    </div>
+                    
+                    <div>
+                            <input type="checkbox" id="privacy-policy">
+                            Acepto el <a href="#" id="privacy-link">acuerdo de privacidad</a>.
+                    </div>
+                    <br>
+
+
+
                     <b>
                         <input type="submit" value="Registrase">
                     </b>
@@ -91,6 +121,40 @@ Registrarse
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    const form = document.querySelector(".form-login");
+    const checkbox = document.getElementById("privacy-policy");
+    const submitButton = form.querySelector("input[type='submit']");
+    const modal = document.getElementById("privacy-modal");
+    const modalClose = document.getElementById("close-modal");
+    const modalTrigger = document.getElementById("privacy-link");
+
+    form.addEventListener("submit", function(event) {
+        if (!checkbox.checked) {
+            event.preventDefault(); // Evita que el formulario se envíe
+            alert("Debe aceptar el acuerdo de privacidad para continuar.");
+        }
+    });
+
+    modalTrigger.addEventListener("click", function(event) {
+        event.preventDefault();
+        modal.style.display = "block";
+    });
+
+    modalClose.addEventListener("click", function() {
+        modal.style.display = "none";
+    });
+
+    window.addEventListener("click", function(event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+});
+
+
+    </script>
 
 </div>
 @endsection
