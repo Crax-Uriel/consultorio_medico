@@ -119,6 +119,11 @@
                 <td >Consultorio de especialidad: </td>
                 <td>{{$pago->doctor->especialidad}}</td>
             </tr>
+
+            <tr class="row-hover">
+                <td>Atentido por el doctor: </td>
+                <td>{{ $pago->doctor ->nombre_doctor}} {{ $pago->doctor ->apellido_paterno_doctor}} {{ $pago->doctor ->apellido_materno_doctor}}</td>
+            </tr>
            
     
             <tr class="row-hover">
@@ -167,6 +172,11 @@
             <tr class="row-hover">
                 <td >Consultorio de especialidad: </td>
                 <td>{{$pago->doctor->especialidad}}</td>
+            </tr>
+
+            <tr class="row-hover">
+                <td>Atentido por el doctor: </td>
+                <td>{{ $pago->doctor ->nombre_doctor}} {{ $pago->doctor ->apellido_paterno_doctor}} {{ $pago->doctor ->apellido_materno_doctor}}</td>
             </tr>
            
     
